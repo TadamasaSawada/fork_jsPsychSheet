@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- jsPsychSheet library -->
+    <script src="https://brain2ai.github.io/jsPsychSheet/jspsychsheet.js"></script>
+    <link rel="stylesheet" href="https://brain2ai.github.io/jsPsychSheet/jspsychsheet.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/jspsych@7.3.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2" ></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+  <script>
+    
+    var jsPsych = initJsPsych({
+      on_finish: function() {
+        url = "https://script.google.com/macros/s/AKfycbwepTqlPGNtQthuZAY0KtjpG-hhdMHPRNq3g_ztaagbnD9U7ggSVa8cSVrlvJTaRG3TNA/exec";
+        jsPsychSheet.uploadData(url, jsPsych.data.get().csv())
+      }
+    });
+
+    var scale = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
+
+    var likert_trial = {
+        type: jsPsychSurveyLikert,
+        questions: [
+          {prompt: "I like vegetables.", name: 'Vegetables', labels: scale, required: true},
+          {prompt: "I like fruit.", name: 'Fruit', labels: scale, required: true}
+        ],
+    };
+
+    var likert_trial_random_order = {
+        type: jsPsychSurveyLikert,
+        questions: [
+          {prompt: "Question 1", labels: scale},
+          {prompt: "Question 2", labels: scale},
+          {prompt: "Question 3", labels: scale},
+          {prompt: "Question 4", labels: scale},
+          {prompt: "Question 5", labels: scale}
+        ],
+        randomize_question_order: true,
+        scale_width: 500
+    };
+
+    jsPsych.run([likert_trial, likert_trial_random_order]);
+    
+  </script>
+</html>

@@ -20,8 +20,6 @@
   <script>
     
     var jsPsych = initJsPsych({
-      timeline: timeline,
-      show_progress_bar: true,
       on_finish: function() {
         url = "https://script.google.com/macros/s/AKfycbwepTqlPGNtQthuZAY0KtjpG-hhdMHPRNq3g_ztaagbnD9U7ggSVa8cSVrlvJTaRG3TNA/exec";
         jsPsychSheet.uploadData(url, jsPsych.data.get().csv())

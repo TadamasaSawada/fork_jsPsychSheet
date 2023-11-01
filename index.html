@@ -4,17 +4,21 @@
     <!-- jsPsychSheet library -->
     <script src="https://tadamasasawada.github.io/forked_jsPsychSheet/jspsychsheet.js"></script>
     <link rel="stylesheet" href="https://tadamasasawada.github.io/forked_jsPsychSheet/jspsychsheet.css">
-
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://unpkg.com/jspsych@7.3.3"></script>
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+    
+    <script src="https://unpkg.com/@jspsych/plugin-survey@0.2.1"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.2.1/css/survey.css">
+
     <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2" ></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
-    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+    
   </head>
   <body></body>
   <script>
@@ -29,28 +33,221 @@
 
     var scale = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
 
-    var likert_trial = {
+    var page00_Consent = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'multi-choice',
+            prompt: "Click the checkbox below to indicate the you would like to participate in the experiment.",
+            name: 'Consent_Participation',
+            options: ["I agree to take part in this study."],
+            required: true
+          },
+          {
+            type: 'html',
+            prompt: 'If you disagree, please close this tab or this window to leave the study.',
+          },
+        ]
+      ],
+      button_label_finish: 'Start',
+    };
+
+    var page11_ranking = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'ranking',
+            prompt: "This is a ranking questionnaire.",
+            name: 'Sample_Ranking',
+            options: ['Tomato', 'Cucumber', 'Eggplant', 'Corn', 'Peas'],
+            required: true
+          },
+        ]
+      ],
+      button_label_finish: 'Continue',
+    };
+
+    var page12_textfield = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'text',
+            prompt: "Where were you born?", 
+            placeholder: 'City, State, Country',
+            textbox_rows: 3,
+            name: 'birthplace', 
+            required: true,
+          }, 
+          {
+            type: 'text',
+            prompt: "How old are you?", 
+            name: 'age', 
+            textbox_columns: 5,
+            required: false,
+          }
+        ],
+      ],
+      button_label_finish: 'Continue',
+      show_question_numbers: 'onPage'
+    };
+
+    var page13_multichoice_multiselect = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'multi-choice',
+            prompt: "Which of the following do you like the most?",
+            name: 'VegetablesLike',
+            options: ['Tomato', 'Cucumber', 'Eggplant', 'Corn', 'Peas'],
+            required: true
+          },
+          {
+            type: 'multi-select',
+            prompt: "Which of the following do you like?",
+            name: 'FruitLike',
+            options: ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry'],
+            required: false,
+          }
+        ]
+      ],
+      button_label_finish: 'Continue',
+    };
+
+    var page14_likert = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'likert',
+            prompt: 'I like to eat vegetables.',
+            likert_scale_min_label: 'Strongly Disagree',
+            likert_scale_max_label: 'Strongly Agree',
+            likert_scale_values: [1,2,3,4,5,6,10]
+          }, 
+          {
+            type: 'likert-table',
+            prompt: ' ',
+            statements: [
+              {prompt: 'I like to eat vegetables', name: 'VeggiesTable'},
+              {prompt: 'I like to eat fruit', name: 'FruitTable'},
+              {prompt: 'I like to eat meat', name: 'MeatTable'},
+            ],
+            options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+          }
+        ],
+      ],
+      button_label_finish: 'Continue',
+    };
+
+
+    var scale = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
+
+    var page21_likert_trial = {
         type: jsPsychSurveyLikert,
         questions: [
           {prompt: "I like vegetables.", name: 'Vegetables', labels: scale, required: true},
           {prompt: "I like fruit.", name: 'Fruit', labels: scale, required: true}
-        ],
+        ]
     };
 
-    var likert_trial_random_order = {
+    var page22_likert_trial_random_order = {
         type: jsPsychSurveyLikert,
         questions: [
           {prompt: "Question 1", labels: scale},
           {prompt: "Question 2", labels: scale},
-          {prompt: "Question 3", labels: scale},
-          {prompt: "Question 4", labels: scale},
-          {prompt: "Question 5", labels: scale}
+          {prompt: "Question 3", labels: scale}
         ],
         randomize_question_order: true,
-        scale_width: 500
+        scale_width: 900
     };
 
-    jsPsych.run([likert_trial, likert_trial_random_order]);
+    var page31_textfield_inline = {
+      type: jsPsychSurveyHtmlForm,
+      preamble: '<p> Similar to the earlier text fields but from a different library.<BR>How are you feeling <b>right now?</b> </p>',
+      html: '<p>I am feeling <input name="box1" type="text" />, <input name="box2" type="text" />, and <input name="box3" type="text" />.</p>',
+      autofocus: 'box1'
+    };
+    
+    var page32_textfield = {
+      type: jsPsychSurveyText,
+      questions: [
+        {prompt: 'Similar to the earlier text fields but from a different library.', placeholder: 'Which one do you like?', rows:10, columns: 50}
+      ]
+    };
+
+    var page_1_options = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
+    var page_2_options = ["Strongly Disagree", "Disagree", "Somewhat Disagree", "Neutral", "Somewhat Agree", "Agree", "Strongly Agree"];
+
+    var page41_multichoiceH = {
+      type: jsPsychSurveyMultiChoice,
+      questions: [
+        {prompt: "I like vegetables", options: page_1_options, required: true, horizontal: true,}, 
+        {prompt: "I like fruit", options: page_2_options, required: false, horizontal: true}
+      ],
+    };
+    
+    var page42_multichoiceV = {
+      type: jsPsychSurveyMultiChoice,
+      questions: [
+        {prompt: "I like vegetables", name: 'Vegetables', options: page_1_options, required:true}, 
+        {prompt: "I like fruit", name: 'Fruit', options: page_2_options, required: false}
+      ],
+      randomize_question_order: true
+    };
+
+    var page51_multiselectH = {
+      type: jsPsychSurveyMultiSelect,
+      questions: [
+        {
+          prompt: "Which of these colors do you like?", 
+          options: ["Red", "Yellow", "Green", "Blue", "Black"], 
+          horizontal: true,
+          required: true,
+          name: 'Colors'
+        }, 
+        {
+          prompt: "Which of these foods do you like?", 
+          options: ["Apples", "Bananas", "Carrots", "Donuts", "Eggplant"], 
+          horizontal: true,
+          required: true,
+          name: 'Foods'
+        }
+      ], 
+      randomize_question_order: true
+    };
+    
+    var page52_multiselectV = {
+      type: jsPsychSurveyMultiSelect,
+      questions: [
+        {
+          prompt: "Which of these colors do you like?", 
+          options: ["Red", "Yellow", "Green", "Blue", "Black"], 
+          horizontal: false,
+          required: true,
+          name: 'Colors'
+        }, 
+        {
+          prompt: "Which of these foods do you like?", 
+          options: ["Apples", "Bananas", "Carrots", "Donuts", "Eggplant"], 
+          horizontal: false,
+          required: true,
+          name: 'Foods'
+        }
+      ], 
+      randomize_question_order: true
+    };
+      
+    jsPsych.run([page00_Consent,
+                 page11_ranking, page12_textfield, page13_multichoice_multiselect, page14_likert,
+                 page21_likert_trial, page22_likert_trial_random_order,
+                 page31_textfield_inline, page32_textfield,
+                 page41_multichoiceH, page42_multichoiceV,
+                 page51_multiselectH, page52_multiselectV
+                ]);
     
   </script>
 </html>

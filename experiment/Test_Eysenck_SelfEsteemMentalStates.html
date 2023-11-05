@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- jsPsychSheet library -->
+    <script src="https://tadamasasawada.github.io/forked_jsPsychSheet/jspsychsheet.js"></script>
+    <link rel="stylesheet" href="https://tadamasasawada.github.io/forked_jsPsychSheet/jspsychsheet.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/jspsych@7.3.3"></script>
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+    
+    <script src="https://unpkg.com/@jspsych/plugin-survey@0.2.1"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.2.1/css/survey.css">
+
+    <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2" ></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
+    
+  </head>
+  <body></body>
+  <script>
+    
+    var jsPsych = initJsPsych({
+      on_finish: function() {
+        url = "https://script.google.com/macros/s/AKfycbwepTqlPGNtQthuZAY0KtjpG-hhdMHPRNq3g_ztaagbnD9U7ggSVa8cSVrlvJTaRG3TNA/exec";
+        jsPsychSheet.uploadData(url, jsPsych.data.get().csv())
+      }
+    });
+
+
+    var scale = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
+
+    var page00_Consent = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'multi-choice',
+            prompt: "Click the checkbox below to indicate the you would like to participate in the experiment.",
+            name: 'Consent_Participation',
+            options: ["I agree to take part in this study."],
+            required: true,
+          },
+          {
+            type: 'html',
+            prompt: 'If you disagree, please close this tab or this window to leave the study.',
+          },
+        ]
+      ],
+      button_label_finish: 'Start',
+    };
+
+    var page01_Самооценка_психических_состояний_Айзенка = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'likert-table',
+            prompt: 'Предлагается описание различных психических состояний.' +
+                    'Если это состояние часто наблюдается, то ставится 2 балла,' +
+                    'если это состояние бывает, но изредка, то ставится 1 балл,' +
+                    'если совсем не подходит - 0 баллов.',
+            required: true,
+            statements: [
+              {name: 'Q01', prompt: '01) Не чувствую в себе уверенности.'},
+              {name: 'Q02', prompt: '02) Часто из-за пустяков краснею.'},
+              {name: 'Q03', prompt: '03) Мой сон беспокоен.'},
+              {name: 'Q04', prompt: '04) Легко впадаю в уныние.'},
+              {name: 'Q05', prompt: '05) Беспокоюсь о только воображаемых еще неприятностях.'},
+              {name: 'Q06', prompt: '06) Меня пугают трудности.'},
+              {name: 'Q07', prompt: '07) Люблю копаться в своих недостатках.'},
+              {name: 'Q08', prompt: '08) Меня легко убедить.'},
+              {name: 'Q09', prompt: '09) Я мнительный.'},
+              {name: 'Q10', prompt: '10) Я с трудом переношу время ожидания.'},
+            ],
+            randomize_statement_order: false,
+            options: ['0','1','2'],
+          }
+        ],
+        [
+          {
+            type: 'likert-table',
+            prompt: 'Предлагается описание различных психических состояний.' +
+                    'Если это состояние часто наблюдается, то ставится 2 балла,' +
+                    'если это состояние бывает, но изредка, то ставится 1 балл,' +
+                    'если совсем не подходит - 0 баллов.',
+            required: true,
+            statements: [
+              {name: 'Q11', prompt: '11) Нередко мне кажутся безвыходными положения, из которых в1е-таки можно найти выход.'},
+              {name: 'Q12', prompt: '12) Неприятности меня сильно расстраивают, я падаю духом.'},
+              {name: 'Q13', prompt: '13) При больших неприятностях я склонен без достаточных оснований винить себя.'},
+              {name: 'Q14', prompt: '14) Несчастья и неудачи ничему меня не учат.'},
+              {name: 'Q15', prompt: '15) Я часто отказываюсь от борьбы, считая ее бесплодной.'},
+              {name: 'Q16', prompt: '16) Я нередко чувствую себя беззащитным.'},
+              {name: 'Q17', prompt: '17) Иногда у меня бывает состояние отчаяния.'},
+              {name: 'Q18', prompt: '18) Я чувствую растерянность перед трудностями.'},
+              {name: 'Q19', prompt: '19) В трудные минуты жизни иногда веду себя по-детски, хочу, чтобы пожалели.'},
+              {name: 'Q20', prompt: '20) Считаю недостатки своего характера неисправимыми.'},
+            ],
+            randomize_statement_order: false,
+            options: ['0','1','2'],
+          }
+        ],
+        [
+          {
+            type: 'likert-table',
+            prompt: 'Предлагается описание различных психических состояний.' +
+                    'Если это состояние часто наблюдается, то ставится 2 балла,' +
+                    'если это состояние бывает, но изредка, то ставится 1 балл,' +
+                    'если совсем не подходит - 0 баллов.',
+            required: true,
+            statements: [
+              {name: 'Q21', prompt: '21) Оставляю за собой последнее слово.'},
+              {name: 'Q22', prompt: '22) Нередко в разговоре перебиваю собеседника.'},
+              {name: 'Q23', prompt: '23) Меня легко рассердить.'},
+              {name: 'Q24', prompt: '24) Люблю делать замечания другим.'},
+              {name: 'Q25', prompt: '25) Хочу быть авторитетом для других.'},
+              {name: 'Q26', prompt: '26) Не довольствуюсь малым, хочу наибольшего.'},
+              {name: 'Q27', prompt: '27) Когда разгневаюсь, плохо себя сдерживаю.'},
+              {name: 'Q28', prompt: '28) Предпочитаю лучше руководить, чем подчиняться.'},
+              {name: 'Q29', prompt: '29) У меня резкая, грубоватая жестикуляция.'},
+              {name: 'Q30', prompt: '30) Я мстителен.'},
+
+            ],
+            randomize_statement_order: false,
+            options: ['0','1','2'],
+          }
+        ],
+        [
+          {
+            type: 'likert-table',
+            prompt: 'Предлагается описание различных психических состояний.' +
+                    'Если это состояние часто наблюдается, то ставится 2 балла,' +
+                    'если это состояние бывает, но изредка, то ставится 1 балл,' +
+                    'если совсем не подходит - 0 баллов.',
+            required: true,
+            statements: [
+              {name: 'Q31', prompt: '31) Мне трудно менять привычки.'},
+              {name: 'Q32', prompt: '32) Нелегко переключать внимание.'},
+              {name: 'Q33', prompt: '33) Очень настороженно отношусь ко всему новому.'},
+              {name: 'Q34', prompt: '34) Меня трудно переубедить.'},
+              {name: 'Q35', prompt: '35) Нередко у меня не выходит из головы мысль, от которой следовало бы освободиться.'},
+              {name: 'Q36', prompt: '36) Нелегко сближаюсь с людьми.'},
+              {name: 'Q37', prompt: '37) Меня расстраивают даже незначительные нарушения плана.'},
+              {name: 'Q38', prompt: '38) Нередко я проявляю упрямство.'},
+              {name: 'Q39', prompt: '39) Неохотно иду на риск.'},
+              {name: 'Q40', prompt: '40) Резко переживаю отклонения от принятого мною режима дня.'},
+            ],
+            randomize_statement_order: false,
+            options: ['0','1','2'],
+          }
+        ],
+      ],
+      button_label_next: 'Next',
+      button_label_back: 'Back',
+      button_label_finish: 'Finish',
+    };
+      
+    jsPsych.run([page00_Consent,
+                 page01_Самооценка_психических_состояний_Айзенка
+                ]);
+    
+  </script>
+</html>

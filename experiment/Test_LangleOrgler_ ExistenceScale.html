@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- jsPsychSheet library -->
+    <script src="https://tadamasasawada.github.io/forked_jsPsychSheet/jspsychsheet.js"></script>
+    <link rel="stylesheet" href="https://tadamasasawada.github.io/forked_jsPsychSheet/jspsychsheet.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/jspsych@7.3.3"></script>
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+    
+    <script src="https://unpkg.com/@jspsych/plugin-survey@0.2.1"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.2.1/css/survey.css">
+
+    <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2" ></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
+    
+  </head>
+  <body></body>
+  <script>
+    
+    var jsPsych = initJsPsych({
+      on_finish: function() {
+        url = "https://script.google.com/macros/s/AKfycbwepTqlPGNtQthuZAY0KtjpG-hhdMHPRNq3g_ztaagbnD9U7ggSVa8cSVrlvJTaRG3TNA/exec";
+        jsPsychSheet.uploadData(url, jsPsych.data.get().csv())
+      }
+    });
+
+
+    var scale = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
+
+    var page00_Consent = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'multi-choice',
+            prompt: "Click the checkbox below to indicate the you would like to participate in the experiment.",
+            name: 'Consent_Participation',
+            options: ["I agree to take part in this study."],
+            required: true,
+          },
+          {
+            type: 'html',
+            prompt: 'If you disagree, please close this tab or this window to leave the study.',
+          },
+        ]
+      ],
+      button_label_finish: 'Start',
+    };
+
+    var page01_Самооценка_психических_состояний_Айзенка = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'likert-table',
+            prompt: 'Насколько Вам подходит следующее высказывание, варианты ответов: ' +
+                    '"верно", "верно за редкими исключениями", "скорее верно",' +
+                    '"скорее не верно", "не верно за редкими исключениями", "не верно".',
+            required: true,
+            statements: [
+              {name: 'Q01', prompt: '1) Часто я бросаю даже важную деятельность, если усилия, которые требуются, становятся слишком неприятными.'},
+              {name: 'Q02', prompt: '2) Я чувствую, что те задачи, которые передо мной стоят, представляют для меня ценность.'},
+              {name: 'Q03', prompt: '3) Для меня что-то имеет значение лишь тогда, когда это соответствует моему желанию.'},
+              {name: 'Q04', prompt: '4) В моей жизни нет ничего ценного.'},
+              {name: 'Q05', prompt: '5) Больше всего мне нравится заниматься самим собой – моими заботами, желаниями, мечтами, страхами.'},
+              {name: 'Q06', prompt: '6) Обычно я бываю рассеян.'},
+              {name: 'Q07', prompt: '7) Даже если я многое сделал, я не удовлетворен, потому что чувствую, что не сделал того, что было важным.'},
+              {name: 'Q08', prompt: '8) Я всегда ориентируюсь на ожидания других и поступаю в соответствии с этим.'},
+              {name: 'Q09', prompt: '9) Мне свойственно откладывать неприятные решения в долгий ящик.'},
+              {name: 'Q10', prompt: '10) Меня легко отвлечь, даже если я занят тем, что мне нравится.'},
+              {name: 'Q11', prompt: '11) В моей жизни нет ничего такого, чему бы я хотел себя посвятить.'},
+              {name: 'Q12', prompt: '12) Я часто не понимаю, почему именно я должен это делать.'},
+              {name: 'Q13', prompt: '13) Я думаю, что та жизнь, которую я веду, ни на что не годна.'},
+              {name: 'Q14', prompt: '14) Мне трудно понимать смысл вещей.'},
+              {name: 'Q15', prompt: '15) Я могу обходиться с самим собой как с хорошим другом.'},
+              {name: 'Q16', prompt: '16) Я слишком мало времени уделяю тому, что является по-настоящему важным.'},
+              {name: 'Q17', prompt: '17) У меня сразу никогда не бывает ясности по поводу того, что я могу сделать в какой-либо ситуации.'},
+              {name: 'Q18', prompt: '18) Я многое делаю только потому, что я должен это делать, а не потому, что я хочу это сделать.'},
+              {name: 'Q19', prompt: '19) Если возникают проблемы, я легко теряю голову.'},
+              {name: 'Q20', prompt: '20) Я часто делаю то, что можно с таким же успехом сделать и позже.'},
+              {name: 'Q21', prompt: '21) Мне каждый раз интересно, что принесет день.'},
+              {name: 'Q22', prompt: '22) В большинстве случаев, только начав действовать, я понимаю, какие последствия имеет принятое решение.'},
+              {name: 'Q23', prompt: '23) Если я должен принять решение, я не могу положиться на свои чувства.'},
+              {name: 'Q24', prompt: '24) Неуверенность в исходе дела удерживает меня от его выполнения, даже если я болею за него душой.'},
+              {name: 'Q25', prompt: '25) Я никогда точно не знаю, за что я отвечаю.'},
+              {name: 'Q26', prompt: '26) Я чувствую себя внутренне свободным(ой).'},
+              {name: 'Q27', prompt: '27) Из-за того, что жизнь не дала исполниться моим желаниям, я чувствую себя обделенным(ой) ею.'},
+              {name: 'Q28', prompt: '28) Когда я вижу, что у меня нет выбора, я чувствую облегчение.'},
+              {name: 'Q29', prompt: '29) Есть ситуации, в которых я себя чувствую совсем беспомощным(ой).'},
+              {name: 'Q30', prompt: '30) Я делаю много такого, в чем я по-настоящему не разбираюсь.'},
+              {name: 'Q31', prompt: '31) Обычно я не знаю, что в ситуации является важным.'},
+              {name: 'Q32', prompt: '32) Исполнение собственных желаний стоит для меня на первом месте.'},
+              {name: 'Q33', prompt: '33) Мне трудно проникнуться чувствами других.'},
+              {name: 'Q34', prompt: '34) Было бы лучше, если бы меня не было.'},
+              {name: 'Q35', prompt: '35) Многое из того, с чем я связан, чуждо мне.'},
+              {name: 'Q36', prompt: '36) Мне нравится формировать собственное мнение.'},
+              {name: 'Q37', prompt: '37) Я чувствую, что разрываюсь, потому что одновременно делаю так много вещей.'},
+              {name: 'Q38', prompt: '38) Мне не хватает сил, чтобы довести до конца даже самые важные вещи.'},
+              {name: 'Q39', prompt: '39) Я делаю многое просто так, особенно не задумываясь.'},
+              {name: 'Q40', prompt: '40) Ситуация для меня лишь тогда представляет интерес, когда она соответствует моим желаниям.'},
+              {name: 'Q41', prompt: '41) Когда я болею, то не знаю, что делать с этим временем.'},
+              {name: 'Q42', prompt: '42) Я редко вижу, что у меня есть разные возможности для действия в ситуации.'},
+              {name: 'Q43', prompt: '43) Я нахожу окружающий мир однообразным.'},
+              {name: 'Q44', prompt: '44) Вопрос, хочу ли я что-то сделать, редко встает предо мной, потому что чаще всего есть то, что я должен(а) делать.'},
+              {name: 'Q45', prompt: '45) В моей жизни нет ничего действительно хорошего, потому что все имеет свои за и против.'},
+              {name: 'Q46', prompt: '46) Моя внутренняя несвобода и зависимость доставляют мне много хлопот.'},
+            ],
+            randomize_statement_order: false,
+            options: ['верно',
+                      'верно с ограничениями',
+                      'скорее верно',
+                      'скорее не верно',
+                      'не верно с ограничениями',
+                      'не верно',],
+          }
+        ],
+      ],
+      button_label_next: 'Next',
+      button_label_back: 'Back',
+      button_label_finish: 'Finish',
+    };
+      
+    jsPsych.run([page00_Consent,
+                 page01_Самооценка_психических_состояний_Айзенка
+                ]);
+    
+  </script>
+</html>

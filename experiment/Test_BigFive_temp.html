@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- jsPsychSheet library -->
+    <script src="https://tadamasasawada.github.io/forked_jsPsychSheet/jspsychsheet.js"></script>
+    <link rel="stylesheet" href="https://tadamasasawada.github.io/forked_jsPsychSheet/jspsychsheet.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/jspsych@7.3.3"></script>
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+    
+    <script src="https://unpkg.com/@jspsych/plugin-survey@0.2.1"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.2.1/css/survey.css">
+
+    <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2" ></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
+    
+  </head>
+  <body></body>
+  <script>
+    
+    var jsPsych = initJsPsych({
+      on_finish: function() {
+        url = "https://script.google.com/macros/s/AKfycbwepTqlPGNtQthuZAY0KtjpG-hhdMHPRNq3g_ztaagbnD9U7ggSVa8cSVrlvJTaRG3TNA/exec";
+        jsPsychSheet.uploadData(url, jsPsych.data.get().csv())
+      }
+    });
+
+    var page00_Consent = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            type: 'multi-choice',
+            prompt: "Click the checkbox below to indicate the you would like to participate in the experiment.",
+            name: 'Consent_Participation',
+            options: ["I agree to take part in this study."],
+            required: true
+          },
+          {
+            type: 'html',
+            prompt: 'If you disagree, please close this tab or this window to leave the study.',
+          },
+        ]
+      ],
+      button_label_finish: 'Start',
+    };
+    
+    var page01_Пятифакторный_опросник_личности = {
+      type: jsPsychSurvey,
+      pages: [
+        [
+          {
+            name: 'Q01',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "1. Мне нравиться заниматься физкультурой",
+            likert_scale_max_label: "Я не люблю физические нагрузки",
+          },
+          {
+            name: 'Q02',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "2. Люди считают меня отзывчивым и доброжелательным человеком",
+            likert_scale_max_label: "Некоторые люди считают меня холодным и черствым",
+          },
+          {
+            name: 'Q03',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "3. Я во всем ценю чистоту и порядок",
+            likert_scale_max_label: "Иногда я позволяю себе быть неряшливым",
+          },
+          {
+            name: 'Q04',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "4. Меня часто беспокоит мысль, что что-нибудь может случиться",
+            likert_scale_max_label: "«Мелочи жизни» меня не тревожат",
+          },
+          {
+            name: 'Q05',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "5. Все новое вызывает у меня интерес",
+            likert_scale_max_label: "Часто новое вызывает у меня раздражение",
+          },
+          {
+            name: 'Q06',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "6. Если я ничем не занят, то это меня беспокоит",
+            likert_scale_max_label: "Я человек спокойный и не люблю суетиться",
+          },
+          {
+            name: 'Q07',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "7. Я стараюсь проявлять дружелюбие ко всем людям",
+            likert_scale_max_label: "Я не всегда и не со всеми дружелюбный человек",
+          },
+          {
+            name: 'Q08',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "8. Моя комната всегда аккуратно прибрана",
+            likert_scale_max_label: "Я не очень стараюсь следить за чистотой и порядком",
+          },
+          {
+            name: 'Q09',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "9. Иногда я расстраиваюсь из-за пустяков",
+            likert_scale_max_label: "Я не обращаю внимания на мелкие проблемы",
+          },
+          {
+            name: 'Q10',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "10. Мне нравятся неожиданности",
+            likert_scale_max_label: "Я люблю предсказуемость событий",
+          },
+          {
+            name: 'Q11',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "11. Я не могу долго оставаться в неподвижности",
+            likert_scale_max_label: "Мне не нравится быстрый стиль жизни",
+          },
+          {
+            name: 'Q12',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "12. Я тактичен по отношения к другим людям",
+            likert_scale_max_label: "Иногда в шутку я задеваю самолюбие других",
+          },
+          {
+            name: 'Q13',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "13. Я методичен и пунктуален во всем",
+            likert_scale_max_label: "Я не очень обязательный человек",
+          },
+          {
+            name: 'Q14',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "14. Мои чувства легко уязвимы и ранимы",
+            likert_scale_max_label: "Я редко тревожусь и редко чего-либо боюсь",
+          },
+          {
+            name: 'Q15',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "15. Мне не интересно, когда ответ ясен заранее",
+            likert_scale_max_label: "Я не интересуюсь вещами, которые мне не понятны",
+          },
+          {
+            name: 'Q16',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "16. Я люблю, чтобы другие быстро выполняли мои распоряжения",
+            likert_scale_max_label: "Я не спеша выполняю чужие распоряжения",
+          },
+          {
+            name: 'Q17',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "17. Я уступчивый и склонный к компромиссам человек",
+            likert_scale_max_label: "Я люблю поспорить с окружающими",
+          },
+          {
+            name: 'Q18',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "18. Я проявляю настойчивость, решая трудную задачу",
+            likert_scale_max_label: "Я не очень настойчивый человек",
+          },
+          {
+            name: 'Q19',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "19. В трудных ситуациях я весь сжимаюсь от напряжения",
+            likert_scale_max_label: "Я могу расслабиться в любой ситуации",
+          },
+          {
+            name: 'Q20',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "20. У меня очень живое воображение",
+            likert_scale_max_label: "Я всегда предпочитаю реально смотреть на мир",
+          },
+          {
+            name: 'Q21',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "21. Мне часто приходится быть лидером, проявлять инициативу",
+            likert_scale_max_label: "Я скорее подчиненный, чем лидер",
+          },
+          {
+            name: 'Q22',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "22. Я всегда готов оказать помощь и разделить чужие трудности",
+            likert_scale_max_label: "Каждый должен уметь позаботиться о себе",
+          },
+          {
+            name: 'Q23',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "23. Я очень старательный во всех делах человек",
+            likert_scale_max_label: "Я не очень усердствую на работе",
+          },
+          {
+            name: 'Q24',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "24. У меня часто выступает холодный пот и дрожат руки",
+            likert_scale_max_label: "Я редко испытывал напряжение, сопровождаемое дрожью в теле",
+          },
+          {
+            name: 'Q25',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "25. Мне нравится мечтать",
+            likert_scale_max_label: "Я редко увлекаюсь фантазиями",
+          },
+          {
+            name: 'Q26',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "26. Часто случается, что я руковожу, отдаю распоряжения другим людям",
+            likert_scale_max_label: "Я предпочитаю, чтобы кто-то другой брал в свои руки руководство",
+          },
+          {
+            name: 'Q27',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "27. Я предпочитаю сотрудничать с другими, чем соперничать",
+            likert_scale_max_label: "Без соперничества общество не могло бы развиваться",
+          },
+          {
+            name: 'Q28',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "28. Я серьезно и прилежно отношусь к работе",
+            likert_scale_max_label: "Я стараюсь не брать дополнительные обязанности на работе",
+          },
+          {
+            name: 'Q29',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "29. В необычной обстановке я часто нервничаю",
+            likert_scale_max_label: "Я легко привыкаю к новой обстановке",
+          },
+          {
+            name: 'Q30',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "30. Иногда я погружаюсь в глубокие размышления",
+            likert_scale_max_label: "Я не люблю тратить свое время на размышления",
+          },
+          {
+            name: 'Q31',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "31. Мне нравится общаться с незнакомыми людьми",
+            likert_scale_max_label: "Я не очень общительный человек",
+          },
+          {
+            name: 'Q32',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "32. Большинство людей добры от природы",
+            likert_scale_max_label: "Я думаю, что жизнь делает некоторых людей злыми",
+          },
+          {
+            name: 'Q33',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "33. Люди часто доверяют мне ответственные дела",
+            likert_scale_max_label: "Некоторые считают меня безответственным",
+          },
+          {
+            name: 'Q34',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "34. Иногда я чувствую себя одиноко, тоскливо и все валится из рук",
+            likert_scale_max_label: "Часто, что-либо делая, я так увлекаюсь, что забываю обо всем",
+          },
+          {
+            name: 'Q35',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "35. Я хорошо знаю, что такое красота и элегантность",
+            likert_scale_max_label: "Мое представление о красоте такое же, как и у других",
+          },
+          {
+            name: 'Q36',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "36. Мне нравится приобретать новых друзей и знакомых",
+            likert_scale_max_label: "Я предпочитаю иметь только несколько надежных друзей",
+          },
+          {
+            name: 'Q37',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "37. Люди, с которыми я общаюсь, обычно мне нравятся",
+            likert_scale_max_label: "Есть такие люди, которых я не люблю",
+          },
+          {
+            name: 'Q38',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "38. Я требователен и строг в работе",
+            likert_scale_max_label: "Иногда я пренебрегаю своими обязанностями",
+          },
+          {
+            name: 'Q39',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "39. Когда я сильно расстроен, у меня тяжело на душе",
+            likert_scale_max_label: "У меня очень редко бывает мрачное настроение",
+          },
+          {
+            name: 'Q40',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "40. Музыка способна так захватить меня, что я теряю чувство времени",
+            likert_scale_max_label: "Драматическое искусство и балет кажутся мне скучными",
+          },
+          {
+            name: 'Q41',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "41. Я люблю находиться в больших и веселых компаниях",
+            likert_scale_max_label: "Я предпочитаю уединение",
+          },
+          {
+            name: 'Q42',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "42. Большинство людей честные, и им можно доверять",
+            likert_scale_max_label: "Иногда я отношусь подозрительно к другим людям",
+          },
+          {
+            name: 'Q43',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "43. Я обычно работаю добросовестно",
+            likert_scale_max_label: "Люди часто находят в моей работе ошибки",
+          },
+          {
+            name: 'Q44',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "44. Я легко впадаю в депрессию",
+            likert_scale_max_label: "Мне невозможно испортить настроение",
+          },
+          {
+            name: 'Q45',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "45. Настоящее произведение искусства вызывает у меня восхищение",
+            likert_scale_max_label: "Я редко восхищаюсь совершенством настоящего произведения искусства",
+          },
+          {
+            name: 'Q46',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "46. «Болея» на спортивных соревнованиях, я забываю обо всем",
+            likert_scale_max_label: "Я не понимаю, почему люди занимаются опасными видами спорта",
+          },
+          {
+            name: 'Q47',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "47. Я стараюсь проявлять чуткость, когда имею дело с людьми",
+            likert_scale_max_label: "Иногда мне нет дела до интересов других людей",
+          },
+          {
+            name: 'Q48',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "48. Я редко делаю необдуманно то, что хочу сделать",
+            likert_scale_max_label: "Я предпочитаю принимать решения быстро",
+          },
+          {
+            name: 'Q49',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "49. У меня много слабостей и недостатков",
+            likert_scale_max_label: "У меня высокая самооценка",
+          },
+          {
+            name: 'Q50',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "50. Я хорошо понимаю свое душевное состояние",
+            likert_scale_max_label: "Мне кажется, что другие люди менее чувствительны, чем я",
+          },
+          {
+            name: 'Q51',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "51. Я часто игнорирую сигналы, предупреждающие об опасности",
+            likert_scale_max_label: "Я предпочитаю избегать опасных ситуаций",
+          },
+          {
+            name: 'Q52',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "52. Радость других я разделяю как собственную",
+            likert_scale_max_label: "Я не всегда разделяю чувства других людей",
+          },
+          {
+            name: 'Q53',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "53. Я обычно контролирую свои чувства и желания",
+            likert_scale_max_label: "Мне трудно сдерживать свои желания",
+          },
+          {
+            name: 'Q54',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "54. Если я терплю неудачу, то обычно обвиняю себя",
+            likert_scale_max_label: "Мне часто «везет», и обстоятельства редко бывают против меня",
+          },
+          {
+            name: 'Q55',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "55. Я верю, что чувства делают мою жизнь содержательнее",
+            likert_scale_max_label: "Я редко обращаю внимание на чужие переживания",
+          },
+          {
+            name: 'Q56',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "56. Мне нравятся карнавальные шествия и демонстрации",
+            likert_scale_max_label: "Мне не нравится находиться в многолюдных местах",
+          },
+          {
+            name: 'Q57',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "57. Я стараюсь поставить себя на место другого человека, чтобы его понять",
+            likert_scale_max_label: "Я не стремлюсь понять все нюансы переживаний других людей",
+          },
+          {
+            name: 'Q58',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "58. В магазине я обычно долго выбираю то, что надумал купить",
+            likert_scale_max_label: "Иногда я покупаю вещи импульсивно",
+          },
+          {
+            name: 'Q59',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "59. Иногда я чувствую себя жалким человеком",
+            likert_scale_max_label: "Обычно я чувствую себя нужным человеком",
+          },
+          {
+            name: 'Q60',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "60. Я легко «вживаюсь» в переживания вымышленного героя",
+            likert_scale_max_label: "Приключения киногероя не могут изменить мое душевное состояние",
+          },
+          
+          {
+            name: 'Q61',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "61. Я чувствую себя счастливым, когда на меня обращают внимание",
+            likert_scale_max_label: "Я скромный человек и стараюсь не выделяться среди людей",
+          },
+          {
+            name: 'Q62',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "62. В каждом человеке есть нечто, за что его можно уважать",
+            likert_scale_max_label: "Я еще не встречал человека, которого можно было бы уважать",
+          },
+          {
+            name: 'Q63',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "63. Обычно я хорошо думаю, прежде чем действую",
+            likert_scale_max_label: "Я не люблю продумывать заранее результаты своих поступков",
+          },
+          {
+            name: 'Q64',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "64. Часто у меня бывают взлеты и падения настроения",
+            likert_scale_max_label: "Обычно у меня ровное настроение",
+          },
+          {
+            name: 'Q65',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "65. Иногда я чувствую себя фокусником, подшучивающим над людьми",
+            likert_scale_max_label: "Люди часто называют меня скучным, но надежным человеком",
+          },
+          {
+            name: 'Q66',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "66. Я привлекателен для лиц противоположного иола",
+            likert_scale_max_label: "Некоторые считают меня обычным и неинтересным человеком",
+          },
+          {
+            name: 'Q67',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "67. Я всегда стараюсь быть добрым и внимательным с каждым человеком",
+            likert_scale_max_label: "Некоторые люди думают, что я самонадеянный и эгоистичный",
+          },
+          {
+            name: 'Q68',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "68. Перед путешествием я намечаю точный план",
+            likert_scale_max_label: "Я не могу понять, зачем люди строят такие детальные планы",
+          },
+          {
+            name: 'Q69',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "69. Мое настроение легко меняется на противоположное",
+            likert_scale_max_label: "Я всегда спокоен и уравновешен",
+          },
+          {
+            name: 'Q70',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "70. Я думаю, что жизнь – это азартная игра",
+            likert_scale_max_label: "Жизнь – это опыт, передаваемый последующим поколениям",
+          },
+          {
+            name: 'Q71',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "71. Мне нравится выглядеть вызывающе",
+            likert_scale_max_label: "В обществе я обычно не выделяюсь поведением и модной одеждой",
+          },
+          {
+            name: 'Q72',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "72. Некоторые говорят, что я снисходителен к окружающим",
+            likert_scale_max_label: "Говорят, что я часто хвастаюсь своими успехами",
+          },
+          {
+            name: 'Q73',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "73. Я точно и методично выполняю свою работу",
+            likert_scale_max_label: "Я предпочитаю «плыть по течению», доверяя своей интуиции",
+          },
+          {
+            name: 'Q74',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "74. Иногда я бываю настолько взволнован, что даже плачу",
+            likert_scale_max_label: "Меня трудно вывести из себя",
+          },
+          {
+            name: 'Q75',
+            type: 'likert', likert_scale_values: [-2,-1,0,1,2], prompt: ' ',
+            likert_scale_min_label: "75. Иногда я чувствую, что могу открыть в себе нечто новое",
+            likert_scale_max_label: "Я не хотел бы ничего в себе менять",
+          },
+        ],
+      ],
+      button_label_next: 'Next',
+      button_label_back: 'Back',
+      button_label_finish: 'Finish',
+    };
+      
+    jsPsych.run([ page00_Consent,
+                  page01_Пятифакторный_опросник_личности
+                ]);
+    
+  </script>
+</html>

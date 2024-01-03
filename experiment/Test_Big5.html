@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-rows: repeat(80, auto); /* 6 rows with height based on content */
+            grid-template-columns: 1fr 220px 1fr;
+            grid-row-gap: 10px; /* Adjust padding as needed */
+        }
+        .grid-cell {
+            display: flex;
+            border: 0px solid #ccc;
+            padding: 0px;
+            align-items: center;
+        }
+        .merged-cells {
+            padding: 10px;
+            grid-column: span 3;
+        }
+        .align-right {
+            justify-content: flex-end;
+            text-align: right;
+        }
+        .align-center {
+            justify-content: center;
+            text-align: center;
+        }
+        .align-left {
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        radioset {
+            display: flex;
+            flex-direction: column;
+        }
+        .radiohidden { display: none; }
+        .radiobox {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #333;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        .radiobox.selected {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #randomId { display: none; }
+        #date { display: none; }
+    </style>
+    <title>Dynamic Height Grid</title>
+</head>
+<body>
+
+    <form method="post" action="" name="big5test" id="big5test">
+        <div class="grid-container">
+            <!-- Consent form -->
+            <div class="merged-cells align-center" style="color:#ff0000">
+                Click the checkbox below to indicate the you would like to participate in the experiment.
+                <br>
+                <input type="checkbox" name="consent" id="consent" required> I agree to take part in this study.
+                <br><br>
+                Experiment ID: <input type="text" name="expid" placeholder="ID" required>
+            </div>
+
+            <div class="merged-cells align-center" style="color:#ff0000">
+                Introduction of this test. There are 75 questionnaires in this test.
+            </div>
+
+            <!-- Question-01 -->
+            <div class="grid-cell align-right">1. Мне нравиться заниматься физкультурой</div>
+            <div class="grid-cell align-center">
+                <div class="radioset">
+                    <label class="radiobox" name="q01" data-value="-2"> <input type="radio" name="q01" class="radiohidden" value="-2" onclick="selectRadio(this)"> -2 </label>
+                    <label class="radiobox" name="q01" data-value="-1"> <input type="radio" name="q01" class="radiohidden" value="-1" onclick="selectRadio(this)"> -1 </label>
+                    <label class="radiobox" name="q01" data-value="0"> <input type="radio" name="q01" class="radiohidden" value="0" onclick="selectRadio(this)"> 0 </label>
+                    <label class="radiobox" name="q01" data-value="1"> <input type="radio" name="q01" class="radiohidden" value="1" onclick="selectRadio(this)"> 1 </label>
+                    <label class="radiobox" name="q01" data-value="2"> <input type="radio" name="q01" class="radiohidden" value="2" onclick="selectRadio(this)"> 2 </label>
+                </div>
+            </div>
+            <div class="grid-cell align-left">Я не люблю физические нагрузки</div>
+
+            <!-- Question-02 -->
+            <div class="grid-cell align-right">2. Люди считают меня отзывчивым и доброжелательным человеком</div>
+            <div class="grid-cell align-center">
+                <div class="radioset">
+                    <label class="radiobox" name="q02" data-value="-2"> <input type="radio" name="q02" class="radiohidden" value="-2" onclick="selectRadio(this)"> -2 </label>
+                    <label class="radiobox" name="q02" data-value="-1"> <input type="radio" name="q02" class="radiohidden" value="-1" onclick="selectRadio(this)"> -1 </label>
+                    <label class="radiobox" name="q02" data-value="0"> <input type="radio" name="q02" class="radiohidden" value="0" onclick="selectRadio(this)"> 0 </label>
+                    <label class="radiobox" name="q02" data-value="1"> <input type="radio" name="q02" class="radiohidden" value="1" onclick="selectRadio(this)"> 1 </label>
+                    <label class="radiobox" name="q02" data-value="2"> <input type="radio" name="q02" class="radiohidden" value="2" onclick="selectRadio(this)"> 2 </label>
+                </div>
+            </div>
+            <div class="grid-cell align-left">Некоторые люди считают меня холодным и черствым</div>
+
+            <div class="merged-cells align-center">
+                <input type="text" id="randomId" name="id" readonly>
+                <input type="text" id="date" name="date" readonly>
+                <input type="submit" value="Отправить" id="submit" style="height:30px; width:120px; font-size:18px; color:#ff0000">
+            </div>
+        </div>
+    </form>
+    
+    <script>
+        function additional_data() {
+            const randomIdInput = document.getElementById('randomId');
+            const randomId = Math.random().toString(36).substr(2, 10);
+            randomIdInput.value = randomId;
+
+            const dateInput = document.getElementById('date');
+            var currentDate = new Date();
+            dateInput.value = currentDate.toISOString().slice(0, 19).replace("T", " ");
+        }
+        additional_data();
+
+        function selectRadio(element) {
+            targetname = element.getAttribute('name');
+            document.querySelectorAll('.radiobox[name="' + targetname + '"]').forEach(function (radio) {
+                radio.classList.remove('selected');
+            });
+            element.parentElement.classList.add('selected');
+        }
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz3EuyjlAuMNQaKP9Zwr95zrkQDseeh8bMH21FwYo-qbnzuBiQBHSEnziLeMMaw8wQYWQ/exec'
+        const form = document.forms['big5test']
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+
+            document.getElementById('submit').value = 'Обработка...';
+            document.getElementById('submit').disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => alert("Спасибо! Ваша форма успешно отправлена."))
+                .then(() => { window.location.reload(); })
+                .catch(error => console.error('Error!', error.message))
+        })
+
+
+    </script>
+</body>
+</html>
